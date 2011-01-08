@@ -49,7 +49,7 @@ class Db_handle
     }
   }
 
-  public function validator($table, $testagainst, $tester, $errmsg) {
+  public function validate_uniqueness($table, $name, $tester, $errmsg) {
     if($table && $testagainst && $tester) {
       $check = mysql_query("SELECT * FROM " . $table . " WHERE " . $testagainst . " = '" . $tester . "'");
 

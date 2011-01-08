@@ -1,5 +1,14 @@
+
 <?php
-include 'partials/header.php'
+include 'partials/header.php';
+
+session_start();
+if(isset($_SESSION['err'])) {
+  foreach($_SESSION['err'] as $err) {
+    echo $err;
+  }
+  unset($_SESSION['err']);
+}
 ?>
 
 <form action="register.php" method="POST" accept-charset="utf-8">
@@ -10,5 +19,5 @@ include 'partials/header.php'
 </form>
 
 <?php
-include 'partials/footer.php'
+include 'partials/footer.php';
 ?>

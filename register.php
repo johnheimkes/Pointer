@@ -4,7 +4,7 @@ require_once 'classes/db.handle.php';
 
 $db = new Db_handle($config);
 
-if($db->validator('users', 'username', $_POST['username']) && $db->validator('users', 'email', $_POST['email']) && isset($_POST['password'])) {
+if($db->validate_uniqueness('users', 'username', $_POST['username']) && $db->validate_uniqueness('users', 'email', $_POST['email']) && isset($_POST['password'])) {
   $create = $db->createUser('users', $_POST['username'], md5($_POST['password']), $_POST['email']);
 
   if($create) {
@@ -15,15 +15,34 @@ if($db->validator('users', 'username', $_POST['username']) && $db->validator('us
     echo 'Error in handling request';
   }
 } else {
-  if(!$db->validator('users', 'username', $_POST['username'])) {
-    echo 'That username has already been taken.<br />';
-  }
+  $err = array();
 
-  if(!$db->validator('users', 'email', $_POST['email'])) {
-    echo 'That email is already registered to a user.<br />';
+  if(!empty($_POST['username'])) {
+    if(!$db->validate_uniqueness('users', 'username', $_POST['username'])) {
+      $err[] = '<p>The username \'' . $_POST['username'] . '\' has already been taken.</p>';
+    }
+  } else {
+    $err[] = '<p>You need to fill out a username.</p>';
+  }
+/*
+  if(!$db->validate_email($_POST['email'])) {
+    $_SESSION['err'] += '<p>' . $_POST['email'] . ' is not a valid email address.</p>';
+  }
+ */
+  if(!empty($_POST['email'])) {
+    if(!$db->validate_uniqueness('users', 'email', $_POST['email'])) {
+      $err[] = '<p>The email address \'' . $_POST['email'] . '\' is already registered to a user.</p>';
+    }
+  } else {
+    $err[] = '<p>You need to fill out an email address.</p>';
   }
 
   if(!$_POST['password']) {
-    echo 'You need to fill in your password.';
+    $err[] = '<p>You need to fill in your password.</p>';
   }
+
+  session_start();
+  $_SESSION['err'] = $err;
+
+  header("Location: /register");
 }
