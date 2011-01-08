@@ -5,7 +5,7 @@ require_once 'classes/db.handle.php';
 $db = new Db_handle($config);
 
 if($db->validator('users', 'username', $_POST['username']) && $db->validator('users', 'email', $_POST['email']) && isset($_POST['password'])) {
-  $create = $db->createUser('users', $_POST['username'], $_POST['password'], $_POST['email']);
+  $create = $db->createUser('users', $_POST['username'], md5($_POST['password']), $_POST['email']);
 
   if($create) {
     session_start();
@@ -27,4 +27,3 @@ if($db->validator('users', 'username', $_POST['username']) && $db->validator('us
     echo 'You need to fill in your password.';
   }
 }
-
