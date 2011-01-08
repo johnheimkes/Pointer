@@ -40,7 +40,7 @@ class Db_handle
     }
   }
 
-  public function createUser($table, $username, $password, $email) {
+  public function create_user($table, $username, $password, $email) {
     if($table && $username && $password) {
       mysql_query("INSERT INTO " . $table . " (username, password, email) VALUES ('" . $username . "','" . $password . "','" . $email . "')");
       return true;
@@ -49,7 +49,7 @@ class Db_handle
     }
   }
 
-  public function validate_uniqueness($table, $name, $tester, $errmsg) {
+  public function validate_uniqueness($table, $testagainst, $tester) {
     if($table && $testagainst && $tester) {
       $check = mysql_query("SELECT * FROM " . $table . " WHERE " . $testagainst . " = '" . $tester . "'");
 
@@ -58,6 +58,45 @@ class Db_handle
       } else {
         return true;
       }
+    }
+  }
+
+  public function validate_email($addr) {
+    if (!ereg("^[^@]{1,64}@[^@]{1,255}$", $addr)) {
+    // Email invalid because wrong number of characters 
+    // in one section or wrong number of @ symbols.
+      return false;
+    }
+
+    $email_array = explode("@", $addr);
+    $local_array = explode(".", $email_array[0]);
+    for ($i = 0; $i < sizeof($local_array); $i++) {
+      if(!ereg("^(([A-Za-z0-9!#$%&'*+/=?^_`{|}~-][A-Za-z0-9!#$%&'*+/=?^_`{|}~\.-]{0,63})|(\"[^(\\|\")]{0,62}\"))$", $local_array[$i])) {
+        return false;
+      }
+    }
+  
+    // Check if domain is IP. If not, 
+    // it should be valid domain name
+    if (!ereg("^\[?[0-9\.]+\]?$", $email_array[1])) {
+      $domain_array = explode(".", $email_array[1]);
+      if (sizeof($domain_array) < 2) {
+          return false; // Not enough parts to domain
+      }
+      for ($i = 0; $i < sizeof($domain_array); $i++) {
+        if(!ereg("^(([A-Za-z0-9][A-Za-z0-9-]{0,61}[A-Za-z0-9])|([A-Za-z0-9]+))$", $domain_array[$i])) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  public function create_person($table, $field, $value) {
+    if($table && $field && $value) {
+      
+    } else {
+      return false;
     }
   }
 }

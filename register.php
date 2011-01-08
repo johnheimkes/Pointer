@@ -5,7 +5,7 @@ require_once 'classes/db.handle.php';
 $db = new Db_handle($config);
 
 if($db->validate_uniqueness('users', 'username', $_POST['username']) && $db->validate_uniqueness('users', 'email', $_POST['email']) && isset($_POST['password'])) {
-  $create = $db->createUser('users', $_POST['username'], md5($_POST['password']), $_POST['email']);
+  $create = $db->create_user('users', $_POST['username'], md5($_POST['password']), $_POST['email']);
 
   if($create) {
     session_start();
@@ -24,12 +24,12 @@ if($db->validate_uniqueness('users', 'username', $_POST['username']) && $db->val
   } else {
     $err[] = '<p>You need to fill out a username.</p>';
   }
-/*
-  if(!$db->validate_email($_POST['email'])) {
-    $_SESSION['err'] += '<p>' . $_POST['email'] . ' is not a valid email address.</p>';
-  }
- */
+
   if(!empty($_POST['email'])) {
+    if(!$db->validate_email($_POST['email'])) {
+      $err[] = '<p>\'' . $_POST['email'] . '\' is not a valid email address.</p>';
+    }
+
     if(!$db->validate_uniqueness('users', 'email', $_POST['email'])) {
       $err[] = '<p>The email address \'' . $_POST['email'] . '\' is already registered to a user.</p>';
     }

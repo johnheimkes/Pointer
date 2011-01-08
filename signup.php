@@ -4,9 +4,11 @@ include 'partials/header.php';
 
 session_start();
 if(isset($_SESSION['err'])) {
+  echo '<div class="err">';
   foreach($_SESSION['err'] as $err) {
     echo $err;
   }
+  echo '</div>';
   unset($_SESSION['err']);
 }
 ?>
