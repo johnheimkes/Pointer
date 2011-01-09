@@ -40,6 +40,18 @@ class Db_handle
     }
   }
 
+  public function check_user($table, $user_field, $name, $pass_field, $pass) {
+    if($table && $name && $pass) {
+      $query = mysql_query("SELECT * FROM " . $table . " WHERE " . $user_field . " = '" . $name . "' AND " . $pass_field . " = '" . $pass . "'");
+
+      if(mysql_fetch_assoc($query)) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+
   public function create_user($table, $username, $password, $email) {
     if($table && $username && $password) {
       mysql_query("INSERT INTO " . $table . " (username, password, email) VALUES ('" . $username . "','" . $password . "','" . $email . "')");

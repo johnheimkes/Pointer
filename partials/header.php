@@ -15,5 +15,18 @@
     <div id="wrapper">
       <div id="header">
         <h1>This is the pointer header!</h1>
+        <div id="nav">
+          <ul id="sub">
+          <?php
+          session_start();
+
+          if(isset($_SESSION['username'])) {
+            echo '<li><a href="/logout">Sign Out</a></li>';
+          } else {
+            echo '<li><a href="/login">Sign In</a></li>';
+          }
+          ?>
+          </ul>
+        </div>
       </div>
       <div id="content">

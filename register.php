@@ -4,7 +4,7 @@ require_once 'classes/db.handle.php';
 
 $db = new Db_handle($config);
 
-if($db->validate_uniqueness('users', 'username', $_POST['username']) && $db->validate_uniqueness('users', 'email', $_POST['email']) && isset($_POST['password'])) {
+if($db->validate_uniqueness('users', 'username', $_POST['username']) && $db->validate_uniqueness('users', 'email', $_POST['email']) && isset($_POST['password']) && $db->validate_email($_POST['email'])) {
   $create = $db->create_user('users', $_POST['username'], md5($_POST['password']), $_POST['email']);
 
   if($create) {
