@@ -20,10 +20,12 @@ class Db_handle
     return $this->connection;
   }
 
-  public function get($table, $req, $where, $val) {
-    if($table) {
+  public function get($table, $req, $where, $val, $order, $order_by) {
+    if($table && $req) {
     /* tests last two params to see whether a condition is necessary */
-      if($where && $val) {
+      if($where && $val && $order && $order_by) {
+        $query = mysql_query("SELECT " . $req . " FROM " . $table . " WHERE " . $where . " = '" . $val . "' ORDER BY " . $order . " " . $order_by);
+      } else if($where && $val) {
         /* if last two exist then run this query */
         $query = mysql_query("SELECT " . $req . " FROM " . $table . " WHERE " . $where . " = '" . $val . "'");
       } else {
@@ -37,6 +39,18 @@ class Db_handle
       }
 
       return $results;
+    }
+  }
+
+  public function get_two_cond($table, $req, $where1, $val1, $where2, $val2) {
+    if($table && $req && $where1 && $val1 && $where2 && $val2) {
+      $query = mysql_query("SELECT " . $req . " FROM " . $table . " WHERE " . $where1 . " = '" . $val1 . "' AND " . $where2 . " = '" . $val2 . "'");
+
+      while($row = mysql_fetch_assoc($query)) {
+        $res[] = $row;
+      }
+
+      return $res;
     }
   }
 
@@ -58,6 +72,12 @@ class Db_handle
       return true;
     } else {
       return false;
+    }
+  }
+
+  public function update($table, $user, $name, $val) {
+    if($table && $user && $name && $val) {
+      mysql_query("UPDATE " . $table . " SET value='" . $val . "' WHERE creator='" . $user . "' AND name='" . $name . "'");
     }
   }
 

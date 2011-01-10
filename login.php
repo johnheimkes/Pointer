@@ -15,7 +15,7 @@ include 'partials/header.php';
 
 ?>
 
-<h2>sign in</h2>
+<h2>sign in <span class="sub">If you do not have an account, please sign up <a href="/register">here</a>.</span></h2>
 <?php
 if(isset($_SESSION['err'])) {
   echo '<div id="err">';
@@ -38,7 +38,6 @@ if(isset($_SESSION['succ'])) {
   <label for="pass">Password: </label><input type="password" id="pass" name="pass" value="" />
   <input type="submit" id="submit" value="login" name="submit" />
 </form>
-<p>If you do not have an account, please sign up <a href="/register">here</a>.</p>
 
 <?php
 include 'partials/footer.php';

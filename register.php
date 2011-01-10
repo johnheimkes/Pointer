@@ -38,7 +38,7 @@ if($db->validate_uniqueness('users', 'username', $_POST['username']) && $db->val
   }
 
   if(!$_POST['password']) {
-    $err[] = '<p>You need to fill in your password.</p>';
+    $err[] = '<p>You need to fill in a password.</p>';
   }
 
   session_start();

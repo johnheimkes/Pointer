@@ -1,0 +1,309 @@
+@import url("reset.css");
+
+body {
+  background: #5aabd0 url(../images/bg.png) repeat-x 0 75px;
+}
+
+#wrapper {
+  width: 700px;
+  margin: 0 auto;
+  padding: 0 10px;
+  font-family: "Archer", times, serif;
+}
+
+#header {
+  width: 700px;
+  float: left;
+  margin-bottom: 20px;
+}
+
+#header h1 a {
+  display: block;
+  text-indent: -9999px;
+  width: 384px;
+  height: 36px;
+  background: url(../images/header.png) top left;
+  float: left;
+  margin-top: 20px;
+}
+
+#header #nav {
+  float: right;
+}
+
+#header #nav ul {
+  float: right;
+  list-style: none;
+  margin-top: 40px;
+}
+
+#header #nav ul li {
+  float: right;
+  margin-left: 20px;
+}
+
+#header #nav ul li a {
+  color: #f3f3f3;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+#header #nav ul li a:hover {
+  text-decoration: underline;
+}
+
+#content {
+  float: left;
+  margin-top: 20px;
+  width: 676px;
+  padding: 15px 10px;
+  border: 2px solid #ccc;
+  background: #f3f3f3;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+#content h2 {
+  float: left;
+  width: 676px;
+  font-size: 24px;
+  text-transform: uppercase;
+  color: #333;
+  text-shadow: #ccc 2px 2px 2px;
+}
+
+#content h2 .sub {
+  font-size: 15px;
+  font-style: italic;
+  text-transform: lowercase;
+  font-weight: normal;
+  margin-left: 7px;
+}
+
+#content h2 .sub a {
+  color: #333;
+}
+
+#content h2 .sub a:hover {
+  text-decoration: none;
+}
+
+#content #err, #content #succ {
+  width: 676px;
+  float: left;
+  padding: 10px 0 5px 0;
+  margin: 15px 0 0 0;
+  opacity: .7;
+  filter: alpha(opacity=70);
+}
+
+#content #err p, #content #succ p {
+  font-size: 16px;
+  color: #f3f3f3;
+  font-weight: bold;
+  margin-left: 15px;
+  margin-bottom: 5px;
+  float: left;
+  width: 650px;
+  font-style: italic;
+}
+
+#content #succ {
+  border-top: 3px solid #39ca22;
+  border-bottom: 3px solid #39ca22;
+  background: #3fe832;
+}
+
+#content #err {
+  border-top: 3px solid #e83232;
+  border-bottom: 3px solid #e83232;
+  background: #ef4242;
+}
+
+#content form {
+  width: 560px;
+  float: left;
+  margin-top: 30px;
+  margin-left: 60px;
+}
+
+#content form label {
+  font-size: 21px;
+  float: left;
+  color: #333;
+  width: 130px;
+}
+
+#content form input {
+  width: 410px;
+  font-size: 18px;
+  padding-left: 10px;
+  margin-bottom: 20px;
+  height: 24px;
+  margin-top: -4px;
+  border: 2px solid #ccc;
+  color: #222;
+  font-family: "Archer", times, serif;
+}
+
+#content form input:focus {
+  border: 2px solid #333;
+}
+
+#content form input#submit {
+  width: auto;
+  height: 34px;
+  font-size: 18px;
+  padding: 5px 20px 0 20px;
+  text-transform: uppercase;
+  font-weight: bold;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  margin-left: 240px;
+  border: none;
+}
+
+#content form input#submit:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+#content form#add_person {
+  margin-left: 20px;
+  width: 676px;
+}
+
+#content form#add_person label {
+  width: 160px;
+}
+
+#content .person {
+  float: left;
+  width: 397px;
+  height: 155px;
+  background: url(../images/banner.png) top left no-repeat;
+}
+
+#content .person h3 {
+  width: 125px;
+  height: 15px;
+  overflow: hidden;
+  margin: 8px 0 0 25px;
+  float: left;
+}
+
+#content .person h3 a {
+  color: #333;
+  text-decoration: none;
+}
+
+#content .person h3 a:hover {
+  text-shadow: #ccc 2px 2px 2px;
+}
+
+#content .person img {
+  float: left;
+  margin: 29px 0 0 -122px;
+  width: 122px;
+  height: 122px;
+}
+
+#content .person p {
+  width: 210px;
+  height: 60px;
+  overflow: hidden;
+  float: left;
+  margin: 50px 0 0 30px;
+  font-size: 60px;
+  font-family: "Impact", helvetica, sans-serif;
+  color: #333;
+}
+
+#content .person_counter {
+  float: left;
+  width: 265px;
+  height: 155px;
+  margin-left: 10px;
+  margin-top: 56px;
+}
+
+#content .person_counter .controls {
+  width: 25px;
+  height: 50px;
+  float: left;
+}
+
+#content .person_counter .controls a {
+  padding: 0;
+  width: 25px;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  color: #f3f3f3;
+  height: 25px;
+  font-weight: bold;
+  text-indent: -9999px;
+  float: left;
+}
+
+#content .person_counter .controls a.add {
+  background: url(../images/add.png) top left;
+}
+
+#content .person_counter .controls a.add:hover {
+  background-position: bottom left;
+}
+
+#content .person_counter .controls a.sub {
+  background: url(../images/sub.png) top left;
+}
+
+#content .person_counter .controls a.sub:hover {
+  background-position: bottom left;
+}
+
+#content .person_counter form {
+  margin: 4px 0 0 0;
+  float: left;
+  width: 240px;
+}
+
+#content .person_counter form input {
+  width: 230px;
+  height: 44px;
+  font-weight: bold;
+  font-size: 36px;
+  color: #333;
+  font-family: "Impact", helvetica, sans-serif;
+}
+
+#footer {
+  float: left;
+  margin: 10px 0;
+  width: 700px;
+  font-size: 18px;
+  font-weight: 200;
+}
+
+#footer p, #footer a {
+  color: #f3f3f3;
+  font-style: italic;
+}
+
+#footer p {
+  float: left;
+}
+
+#footer a {
+  text-decoration: none;
+}
+
+#footer a:hover {
+  text-decoration: underline;
+}
+
+#footer a#source {
+  float: right;
+}

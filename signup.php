@@ -2,9 +2,11 @@
 <?php
 include 'partials/header.php';
 
+echo '<h2>Register</h2>';
+
 session_start();
 if(isset($_SESSION['err'])) {
-  echo '<div class="err">';
+  echo '<div id="err">';
   foreach($_SESSION['err'] as $err) {
     echo $err;
   }
@@ -17,7 +19,7 @@ if(isset($_SESSION['err'])) {
   <label for="username">Username</label><input type="text" name="username" value="" id="username">
   <label for="email">Email</label><input type="text" name="email" value="" id="email">
   <label for="password">Password</label><input type="password" name="password" value="" id="password">
-  <input type="submit" id="register" name="register" value="Register" />
+  <input type="submit" id="submit" class="reg" name="register" value="Register" />
 </form>
 
 <?php
