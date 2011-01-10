@@ -65,6 +65,18 @@ class Db_handle
       }
     }
   }
+  
+  public function check_reg($table, $user_field, $name) {
+    if($table && $name && $pass) {
+      $query = mysql_query("SELECT * FROM " . $table . " WHERE " . $user_field . " = '" . $name . "'");
+
+      if(mysql_fetch_assoc($query)) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
 
   public function create_user($table, $username, $password, $email) {
     if($table && $username && $password) {
@@ -75,9 +87,21 @@ class Db_handle
     }
   }
 
+  public function create_person($table, $fields, $values) {
+    if($table && $fields && $values) {
+      mysql_query("INSERT INTO " . $table . " " . $fields . " VALUES " . $values . "");
+    } else {
+      return false;
+    }
+  }
+
+
   public function update($table, $user, $name, $val) {
     if($table && $user && $name && $val) {
       mysql_query("UPDATE " . $table . " SET value='" . $val . "' WHERE creator='" . $user . "' AND name='" . $name . "'");
+      return true;
+    } else {
+      return false;
     }
   }
 
@@ -122,13 +146,5 @@ class Db_handle
       }
     }
     return true;
-  }
-
-  public function create_person($table, $field, $value) {
-    if($table && $field && $value) {
-      
-    } else {
-      return false;
-    }
   }
 }

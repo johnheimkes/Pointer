@@ -89,7 +89,7 @@ body {
   text-decoration: none;
 }
 
-#content #err, #content #succ {
+#content #err, #content #succ, #content .err {
   width: 676px;
   float: left;
   padding: 10px 0 5px 0;
@@ -98,7 +98,7 @@ body {
   filter: alpha(opacity=70);
 }
 
-#content #err p, #content #succ p {
+#content #err p, #content #succ p, #content .err p {
   font-size: 16px;
   color: #f3f3f3;
   font-weight: bold;
@@ -115,7 +115,7 @@ body {
   background: #3fe832;
 }
 
-#content #err {
+#content #err, #content .err {
   border-top: 3px solid #e83232;
   border-bottom: 3px solid #e83232;
   background: #ef4242;
@@ -188,9 +188,10 @@ body {
 
 #content .person h3 {
   width: 125px;
-  height: 15px;
+  height: 17px;
+  text-transform: uppercase;
   overflow: hidden;
-  margin: 8px 0 0 25px;
+  margin: 7px 0 0 25px;
   float: left;
 }
 
@@ -224,7 +225,6 @@ body {
 #content .person_counter {
   float: left;
   width: 265px;
-  height: 155px;
   margin-left: 10px;
   margin-top: 56px;
 }
@@ -277,6 +277,40 @@ body {
   font-size: 36px;
   color: #333;
   font-family: "Impact", helvetica, sans-serif;
+  margin-bottom: 0;
+}
+
+#content .show {
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+
+#content .holder {
+  float: left;
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+
+#content .holder .err {
+  margin: 0 0 15px 0;
+}
+
+#content .person.show {
+  margin-left: 120px;
+}
+
+#content p.not_found {
+  font-size: 16px;
+  margin: 20px 0 0 0;
+  float: left;
+}
+
+#content p.not_found a {
+  color: #333;
+}
+
+#content p.not_found a:hover {
+  text-decoration: none;
 }
 
 #footer {

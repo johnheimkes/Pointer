@@ -18,7 +18,17 @@ include 'partials/header.php';
 ?>
 <h2>Welcome, <span><?php echo $_SESSION['username']; ?></span></h2>
 
-<form action="add.person.php" method="POST" id="add_person">
+<?php
+if(isset($_SESSION['err'])) {
+  echo '<div id="err">';
+  echo $_SESSION['err'];
+  echo '</div>';
+
+  unset($_SESSION['err']);
+}
+?>
+
+<form action="/newperson" method="POST" id="add_person">
   <label for="t_name">Twitter Handle</label><input type="text" name="t_name" value="@baoist" id="t_name">
   <label for="points">Initial Points</label><input type="text" name="points" value="" id="points">
   <input type="submit" name="submit" value="Add Person" id="submit">
@@ -28,11 +38,19 @@ include 'partials/header.php';
 if($res) echo '<h2>Standings</h2>';
 
 foreach($res as $person) { ?>
-
+<div class="holder">
 <div class="person">
   <h3><a href="http://twitter.com/<?=$person['name']?>" target="_new"><?= $person['name']?></a></h3>
   <!--<img src="' . $person['icon'] . '" /> -->
+<?php
+  if($person['icon']) {
+?>
+  <img src="<?php echo $person['icon']?>" />
+<?  } else { ?>
   <img src="/public/images/filler_icon.png" />
+<?php
+  }
+?>
   <p><?= $person['value']?></p>
 </div>
 <div class="person_counter">
@@ -46,7 +64,7 @@ foreach($res as $person) { ?>
     <input type="hidden" value="<?=$_SESSION['username'];?>" name="owner" id="owner"?>
   </form>
 </div>
-
+</div>
 <?php
 }
 ?>

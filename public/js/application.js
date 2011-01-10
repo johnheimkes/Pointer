@@ -1,20 +1,39 @@
 $(function() {
   $('.controls a').click(function() {
+    remove_div('.err');
+
     var dir = $(this).parent().next('form'),
       post = $(dir).serialize()
       self = this;
       
     post += '&type='+self.className;
 
-    console.log(post);
+    if(parseFloat($(dir).children('#val').val())) {
+      $.post('/' + $(dir).attr('action') + '?type=' + self.className, post, function(data) {
+        if(data) {
+          if(parseFloat(data)) {
+            $(self).parents('.holder').find('.person p').text(data);
+          } else {
+            create_err(data, $(self).parents('.holder'));
+          }
+        }
+      })
+    } else {
+      create_err('The value must be a number.', $(self).parents('.holder'));
+    }
 
-    $.post('/' + $(dir).attr('action') + '?type=' + self.className, post, function(data) {
-      if(data) {
-        console.log(data);
-      }
-      console.log(data);
-    })
-    //
     return false;
   })
+
+  $('input').focus(function() {
+    $(this).val('');
+  })
+
+  function remove_div(div) {
+    $(div).remove();
+  }
+
+  function create_err(msg, loc) {
+    $(loc).prepend('<div class="err"><p>' + msg + '</p></div>');
+  }
 })

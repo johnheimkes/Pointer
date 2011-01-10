@@ -11,7 +11,7 @@ $val = $_POST['val'];
 $name = $_POST['name'];
 $owner = $_POST['owner'];
 
-if($owner = $_SESSION['username']) {
+if($owner == $_SESSION['username'] && is_numeric($val)) {
   $query = $db->get_two_cond('points', '*', 'name', $name, 'creator', $owner);
 
   $oldval = $query[0][value];
@@ -22,18 +22,25 @@ if($owner = $_SESSION['username']) {
     $val += $oldval;
     $offset = 'high';
   } else {
-    $val -= $oldval;
+    $val = $oldval - $val;
     $offset = 'low';
   }
 
-  echo $val;
-
   if(strlen($val) < 7) {
-    echo 'foo';
+    $update = $db->update('points', $owner, $name, $val);
+
+    if($update) {
+      echo $val;
+    } else {
+      echo 'Something went wrong, please try again';
+    }
   } else {
     echo 'The resulting value is too ' . $offset . '.';
   }
 } else {
+  if(!is_numeric($val)) {
+    echo 'That\'s not a number.';
+  }
   return false;
 }
 
